@@ -3,7 +3,9 @@ import os
 
 ARCHIVO = "contactos.json"
 
-def cargar_contactos():
+#==================== Funciones ====================
+
+def cargar_contactos(): 
     if not os.path.exists(ARCHIVO):
         return []
     with open(ARCHIVO, "r", encoding="utf-8") as f:
@@ -44,6 +46,31 @@ def buscar_contacto(contactos):
             print(f"Telefono: {c['telefono']}")
             print(f"Correo:   {c['correo']}")
 
+def actualizar_contacto(contactos):
+    listar_contactos(contactos)
+    if not contactos:
+        return
+    try:
+        indice = int(input("\nNumero de contacto a editar: ")) - 1
+        if 0 <= indice < len(contactos):
+            c = contactos[indice]
+            print(f"Editando '{c['nombre']}' (Enter para mantener el valor actual)")
+            nuevo_nombre = input(f"Nombre [{c['nombre']}]: ").strip()
+            nuevo_telefono = input(f"Telefono [{c['telefono']}]: ").strip()
+            nuevo_correo = input(f"Correo [{c['correo']}]: ").strip()
+            if nuevo_nombre:
+                c['nombre'] = nuevo_nombre
+            if nuevo_telefono:
+                c['telefono'] = nuevo_telefono
+            if nuevo_correo:
+                c['correo'] = nuevo_correo
+            guardar_contactos(contactos)
+            print(f"Contacto actualizado.")
+        else:
+            print("Numero fuera de rango.")
+    except ValueError:
+        print("Entrada invalida.")
+
 def eliminar_contacto(contactos):
     listar_contactos(contactos)
     if not contactos:
@@ -59,13 +86,16 @@ def eliminar_contacto(contactos):
     except ValueError:
         print("Entrada invalida.")
 
+#==================== Menu principal ====================
+
 def mostrar_menu():
     print("\n===== Agenda de Contactos =====")
     print("1. Agregar contacto")
     print("2. Ver todos los contactos")
     print("3. Buscar contacto")
-    print("4. Eliminar contacto")
-    print("5. Salir")
+    print("4. Editar contacto")
+    print("5. Eliminar contacto")
+    print("6. Salir")
     print("================================")
 
 def main():
@@ -74,21 +104,19 @@ def main():
         "1": agregar_contacto,
         "2": listar_contactos,
         "3": buscar_contacto,
-        "4": eliminar_contacto,
+        "4": actualizar_contacto,
+        "5": eliminar_contacto,
     }
 
     while True:
         mostrar_menu()
-        opcion = input("Selecciona una opción: ").strip()
+        opcion = input("Selecciona una opcion: ").strip()
 
-        if opcion == "5":
-            print("¡Hasta luego!")
+        if opcion == "6":
+            print("Bye Bye!")
             break
         elif opcion in acciones:
-            if opcion in ("1", "4"):
-                acciones[opcion](contactos)
-            else:
-                acciones[opcion](contactos)
+            acciones[opcion](contactos)
         else:
             print("Opcion no valida. Intenta de nuevo.")
 
