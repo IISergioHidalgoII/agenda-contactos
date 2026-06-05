@@ -1,6 +1,6 @@
 # Agenda de Contactos
 
-Aplicación de consola para gestionar contactos con nombre, teléfono y correo. Los datos se guardan en un archivo `contactos.json` de forma persistente.
+Aplicación dentro de consola para gestionar contactos con nombre, teléfono y correo. Los datos se guardan en un archivo `contactos.json` de forma persistente.
 
 ## Cómo ejecutar
 

@@ -8,6 +8,7 @@ ARCHIVO = "contactos.json"
 def cargar_contactos(): 
     if not os.path.exists(ARCHIVO):
         return []
+    
     with open(ARCHIVO, "r", encoding="utf-8") as f:
         return json.load(f)
 
@@ -20,6 +21,7 @@ def agregar_contacto(contactos):
     if not nombre:
         print("El nombre no puede estar vacio.")
         return
+    
     telefono = input("Telefono: ").strip()
     correo = input("Correo: ").strip()
     contactos.append({"nombre": nombre, "telefono": telefono, "correo": correo})
@@ -30,6 +32,7 @@ def listar_contactos(contactos):
     if not contactos:
         print("No hay contactos guardados.")
         return
+    
     print(f"\n{'#':<4} {'Nombre':<20} {'Telefono':<15} {'Correo'}")
     print("-" * 60)
     for i, c in enumerate(contactos, 1):
@@ -50,6 +53,7 @@ def actualizar_contacto(contactos):
     listar_contactos(contactos)
     if not contactos:
         return
+    
     try:
         indice = int(input("\nNumero de contacto a editar: ")) - 1
         if 0 <= indice < len(contactos):
@@ -75,6 +79,7 @@ def eliminar_contacto(contactos):
     listar_contactos(contactos)
     if not contactos:
         return
+    
     try:
         indice = int(input("\nNumero de contacto a eliminar: ")) - 1
         if 0 <= indice < len(contactos):
