@@ -16,9 +16,9 @@ def guardar_contactos(contactos):
 def agregar_contacto(contactos):
     nombre = input("Nombre: ").strip()
     if not nombre:
-        print("El nombre no puede estar vacío.")
+        print("El nombre no puede estar vacio.")
         return
-    telefono = input("Teléfono: ").strip()
+    telefono = input("Telefono: ").strip()
     correo = input("Correo: ").strip()
     contactos.append({"nombre": nombre, "telefono": telefono, "correo": correo})
     guardar_contactos(contactos)
@@ -28,7 +28,7 @@ def listar_contactos(contactos):
     if not contactos:
         print("No hay contactos guardados.")
         return
-    print(f"\n{'#':<4} {'Nombre':<20} {'Teléfono':<15} {'Correo'}")
+    print(f"\n{'#':<4} {'Nombre':<20} {'Telefono':<15} {'Correo'}")
     print("-" * 60)
     for i, c in enumerate(contactos, 1):
         print(f"{i:<4} {c['nombre']:<20} {c['telefono']:<15} {c['correo']}")
@@ -41,7 +41,7 @@ def buscar_contacto(contactos):
     else:
         for c in resultados:
             print(f"\nNombre:   {c['nombre']}")
-            print(f"Teléfono: {c['telefono']}")
+            print(f"Telefono: {c['telefono']}")
             print(f"Correo:   {c['correo']}")
 
 def eliminar_contacto(contactos):
@@ -49,15 +49,15 @@ def eliminar_contacto(contactos):
     if not contactos:
         return
     try:
-        indice = int(input("\nNúmero de contacto a eliminar: ")) - 1
+        indice = int(input("\nNumero de contacto a eliminar: ")) - 1
         if 0 <= indice < len(contactos):
             eliminado = contactos.pop(indice)
             guardar_contactos(contactos)
             print(f"Contacto '{eliminado['nombre']}' eliminado.")
         else:
-            print("Número fuera de rango.")
+            print("Numero fuera de rango.")
     except ValueError:
-        print("Entrada inválida.")
+        print("Entrada invalida.")
 
 def mostrar_menu():
     print("\n===== Agenda de Contactos =====")
@@ -66,7 +66,7 @@ def mostrar_menu():
     print("3. Buscar contacto")
     print("4. Eliminar contacto")
     print("5. Salir")
-    print("===============================")
+    print("================================")
 
 def main():
     contactos = cargar_contactos()
@@ -90,7 +90,7 @@ def main():
             else:
                 acciones[opcion](contactos)
         else:
-            print("Opción no válida. Intenta de nuevo.")
+            print("Opcion no valida. Intenta de nuevo.")
 
 if __name__ == "__main__":
     main()
